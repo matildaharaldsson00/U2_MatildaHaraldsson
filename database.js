@@ -1,3 +1,5 @@
+"use strict";
+
 let database = [
     {
         id: 1, 
