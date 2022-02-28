@@ -1,6 +1,6 @@
 body {
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 800px;
     background-color: rgb(247, 247, 174);
 }
 
@@ -13,9 +13,43 @@ h1 {
 
 #headers {
     padding: 10px 20px;
-    border: 1px solid rgb(247, 247, 201);
+    border: 1px solid rgb(255, 255, 254);
     background-color: rgb(243, 197, 233);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
 
+#add-recipe-form {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#filters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 10px;
+}
+
+#show-all {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+button {
+    background-color: rgb(243, 197, 233);
+    color: rgb(238, 120, 212);
+    font-family: 'Bebas Neue';
+}
+
+.recipe {
+    padding: 10px 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.recipe div {
+    display: flex;
+    align-items: center;
+}
