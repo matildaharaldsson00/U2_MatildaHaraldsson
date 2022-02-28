@@ -4,8 +4,8 @@
 function addNewRecipe(recipename, vegetarian, difficulty, time) {
     let recipe = {
         recipename: recipename,
-        vegetarian: answer, 
-        difficulty: level, 
+        vegetarian: vegetarian, 
+        difficulty: difficulty, 
         time: time,
     };
     return recipe;
@@ -111,3 +111,85 @@ function renderRecipes(recipes) {
     // add remove-handlers for the recipes
     setRemoveRecipeHandlers(); 
 }
+
+// when <form id="add-recipe-form"> is submitted
+function onAddRecipeSubmit(event) {
+    event.precentDefault();
+
+    let recipename = document.getElementById("recipename").value;
+    let vegetarian = document.getElementById("vegetarian").value;
+    let difficulty = document.getElementById("difficulty").value;
+    let time = Number(document.getElementById("time").value);
+
+    let recipe = addNewRecipe(recipename, vegetarian, difficulty, time);
+
+    // calculate the newly added recipes ID
+    recipe.id = database[database.length - 1].id + 1;
+
+    addRecipeToDatabase(database, recipe)
+    renderRecipes(database);
+
+    // reset (empty) all form fields
+    let form = document.getElementById("add-recipe-form");
+    form.reset();
+}
+
+// add "click" event handler to <button id="add">
+function setAddRecipeHandler() {
+    let form = document.getElementById("add-recipe-form");
+    form.addEventListener("submit", onAddRecipeSubmit);
+}
+
+// when a user clicks the remove-recipe-button
+function onRemoveRecipeClick(event) {
+    let button = event.target;
+    let id = button.parentElement.id;
+    removeRecipeById(database, id);
+    renderRecipe(database);
+}
+
+// add "click" event handler to all remove-buttons
+function setRemoveRecipeHandlers() {
+    let buttons = document.querySelectorAll(".recipe button");
+
+    for(let button of buttons) {
+        button.addEventListener("click", onRemoveRecipeClick);
+    }
+}
+
+// filter recepies by difficulty 
+function onFilterByDifficultySubmit(event) {
+    event.preventDefault();
+    let difficulty = document.getElementById("filter-difficulty").value;
+    let recipes = getRecipeByDifficulty(database, difficulty);
+    renderRecipes(recipes);
+}
+
+// filter recipes by vegetarian or not
+function onFilterByVegetarianSubmit(event) {
+    event.precentDefault();
+    let vegetarian = document.getElementById("filter-vegetarian").value;
+    let recepies = getRecipeVegetarian(database, vegetarian);
+    renderRecipes(recepies);
+}
+
+function onShowAllClick() {
+    document.getElementById("filter-difficulty").value = "";
+    document.getElementById("filter-vegetarian").value = "";
+    renderRecipes(database);
+}
+
+function setFilterRecipeHandlers() {
+    let difficultyForm = document.getElementById("filter-by-difficulty");
+    let vegetarianForm = document.getElementById("filter-by-vegetarian");
+    let showAll = document.getElementById("show-all");
+
+    difficultyForm.addEventListener("submit", onFilterByDifficultySubmit);
+    vegetarianForm.addEventListener("submit", onFilterByVegetarianSubmit);
+    showAll.addEventListener("click", onShowAllClick);
+}
+
+// initialize the page
+renderRecipes(database);
+setAddRecipeHandler();
+setFilterRecipeHandlers();
