@@ -11,41 +11,17 @@ function addNewRecipe(recipename, vegetarian, difficulty, time) {
     return recipe;
 }
 
-// adding a new recipe from prompt
-function addNewRecipeFromPrompt() {
-    let recipename = prompt("Skriv namnet på ditt recept");
-    let vegetarian = prompt("Är maträtten vegetarisk?");
-    let difficulty = prompt("Vad har receptet för svårighetsgrad?");
-    let time = prompt("Hur lång tid tar det att laga maten?")  
-    
-    let newRecipe = addNewRecipe(recipename, vegetarian, difficulty, Number(time));
-}
-
 // adds a new recipe to our database
 function addRecipeToDatabase(database, recipe) {
-    console.log(`Du har lagt till ${recipe.recipename} bland dina recept`);
     database.push(recipe);
 }
 
-// adds a new recipe to our database from prompts
-function addRecipeToDatabaseFromPrompt(database) {
-    let recipe = addNewRecipeFromPrompt();
-    let saveRecipe = confirm(`Vill du spara ${recipe.recipename} bland dina recept?`);
-
-    if(saveRecipe) {
-        addRecipeToDatabase(database, recipe);
-    };
-}
-
 // removes a recipe based on its recipename from our database
-function removeRecipeByRecipename(recipes, recipename) {
-    for(let i = 0; 1 < database.length; i++) {
-        // this is the current recipe of our loop
+function removeRecipeById(recipes, id) {
+    for(let i = 0; i < recipes.length; i++) {
         let recipe = recipes[i];
-        // check if this recipename is the same as the name that the function recived
-        if(recipe.recipename == recipename) {
-            // if so, remove the recipe from the array
-            database.splice(i, 1)
+        if(recipe.id == id) {
+            recipes.splice(i, 1);
             return;
         }
     }
@@ -64,31 +40,22 @@ function getRecipeByDifficulty(recipes, difficulty) {
 }
 
 // return all recipes based on if its vegetarian or not
-function getRecipeVegetarian(recpies, vegetarian) {
-    let recipeVegetarian = [];
+function getRecipeVegetarian(recipes, vegetarian) {
+    let recipeByVegetarian = [];
 
     for(let recipe of recipes) {
         if(recipe.vegetarian == vegetarian) {
-            recipeVegetarian.push(recipe);
+            recipeByVegetarian.push(recipe);
         }
     }
-    return recipeVegetarian;
-}
-
-// prints all recipes based on difficulty and of its vegetarian or not
-function printRecipeByDifficultyAndVegetarian(recipes, difficulty, vegetarian) {
-    // first filter out recipe by diifculty
-    let recipeByDifficulty = getRecipeByDifficulty(recipes, difficulty);
-    // so we then can use the recope by diffculty to filter them by vegetarian or not
-    let recipeByDifficultyAndVegetarian = getRecipeVegetarian(recipeByDifficulty, vegetarian);
-    // then we print them
-    printRecipes(recipeByDifficultyAndVegetarian);
+    return recipeByVegetarian;
 }
 
 // renders a recipe object into a HTML element 
 function renderRecipe(recipe) {
     let div = document.createElement("div");
     div.classList.add("recipe");
+    div.id = recipe.id;
     div.innerHTML = `
     <div>${recipe.recipename}</div>
     <div>${recipe.vegetarian}</div>
