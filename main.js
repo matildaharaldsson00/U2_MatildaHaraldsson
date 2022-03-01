@@ -114,7 +114,7 @@ function onRemoveRecipeClick(event) {
     let button = event.target;
     let id = button.parentElement.id;
     removeRecipeById(database, id);
-    renderRecipe(database);
+    renderRecipes(database);
 }
 
 // add "click" event handler to all remove-buttons

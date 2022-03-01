@@ -15,6 +15,7 @@ h1 {
 
 #headers {
     padding: 10px 20px;
+    font-size: 15px;
    /* border: 1px solid rgba(207, 66, 66, 0.822); */
     background-color: #9a3237;
     display: grid;
