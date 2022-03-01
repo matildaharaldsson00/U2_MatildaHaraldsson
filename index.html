@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css"> 
     <title>Maträtter</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <h1>Recept</h1>
@@ -13,18 +13,18 @@
         <input id="recipename" type="text" placeholder="Recept">
         <input id="vegetarian" type="text" placeholder="Vegetariskt?">
         <input id="difficulty" type="text" placeholder="Svårighetsgrad">
-        <input id="time" type="text" placeholder="Tid">
+        <input id="time" type="number" placeholder="Tid">
         <button>Lägg till</button>
     </form>
 
     <div id="filters">
         <form id="filter-by-vegetarian">
-            <input id="filter-vegetarian" type="text" placeholder="Vegetariskt eller inte">
+            <input id="filter-vegetarian" type="text" placeholder="Filtera efter om det är vegetariskt eller inte">
             <button>Filter</button>
         </form>
 
-        <form id="filter-by-time">
-            <input id="filter-time" type="number" placeholder="Filterar efter tid">
+        <form id="filter-by-difficulty">
+            <input id="filter-difficulty" type="text" placeholder="Filterar efter svårighetsgrad">
             <button>Filter</button>
         </form>
     </div>
@@ -37,6 +37,8 @@
         <div>Svårighetsgrad:</div>
         <div>Tid det tar att laga:</div>
     </div>
+
+    <ol id="recipes" type="1"></ol>
 
     <script src="database.js"></script>
     <script src="main.js"></script>

@@ -32,7 +32,7 @@ function getRecipeByDifficulty(recipes, difficulty) {
     let recipeByDifficulty = [];
 
     for(let recipe of recipes) {
-        if(recipe.difficulty == difficulty) {
+        if(recipe.difficulty.toLowerCase() == difficulty.toLowerCase()) {
             recipeByDifficulty.push(recipe);
         }
     }
@@ -44,7 +44,7 @@ function getRecipeVegetarian(recipes, vegetarian) {
     let recipeByVegetarian = [];
 
     for(let recipe of recipes) {
-        if(recipe.vegetarian == vegetarian) {
+        if(recipe.vegetarian.toLowerCase() == vegetarian.toLowerCase()) {
             recipeByVegetarian.push(recipe);
         }
     }
@@ -53,16 +53,18 @@ function getRecipeVegetarian(recipes, vegetarian) {
 
 // renders a recipe object into a HTML element 
 function renderRecipe(recipe) {
-    let div = document.createElement("div");
-    div.classList.add("recipe");
-    div.id = recipe.id;
-    div.innerHTML = `
-    <div>${recipe.recipename}</div>
-    <div>${recipe.vegetarian}</div>
-    <div>${recipe.difficulty}</div>
-    <div>${recipe.time}</div>
-    `;
-    return div;
+    let li = document.createElement("div");
+    li.classList.add("recipe");
+    li.id = recipe.id;
+    li.innerHTML = `
+        <li>${recipe.recipename}</li>
+        <div>${recipe.vegetarian}</div>
+        <div>${recipe.difficulty}</div>
+        <div>${recipe.time}</div>
+        <button>Ta bort recept</button>
+        `;
+
+    return li;
 }
 
 // renders an array of recipes into HTML
@@ -81,7 +83,7 @@ function renderRecipes(recipes) {
 
 // when <form id="add-recipe-form"> is submitted
 function onAddRecipeSubmit(event) {
-    event.precentDefault();
+    event.preventDefault();
 
     let recipename = document.getElementById("recipename").value;
     let vegetarian = document.getElementById("vegetarian").value;
@@ -134,7 +136,7 @@ function onFilterByDifficultySubmit(event) {
 
 // filter recipes by vegetarian or not
 function onFilterByVegetarianSubmit(event) {
-    event.precentDefault();
+    event.preventDefault();
     let vegetarian = document.getElementById("filter-vegetarian").value;
     let recepies = getRecipeVegetarian(database, vegetarian);
     renderRecipes(recepies);
