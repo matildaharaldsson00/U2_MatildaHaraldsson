@@ -16,8 +16,8 @@ h1 {
 #headers {
     padding: 10px 20px;
     font-size: 15px;
-   /* border: 1px solid rgba(207, 66, 66, 0.822); */
-    background-color: #9a3237;
+    border: 3px solid #9a3237;
+    background-color: #faf7e6;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
@@ -68,5 +68,8 @@ button {
 }
 
 #recipes {
-    border: 1px solid #9a3237;
+    border-bottom: 3px solid #9a3237;
+    border-left: 3px solid #9a3237;
+    border-right: 3px solid #9a3237;
+    margin-top: 0px;
 }

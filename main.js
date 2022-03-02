@@ -96,6 +96,19 @@ function onAddRecipeSubmit(event) {
     let difficulty = document.getElementById("difficulty").value;
     let time = Number(document.getElementById("time").value);
 
+    if(recipename == "") {
+       return alert(`Du måste fylla i formuläret för att lägga till ett recept`);
+    } 
+    else if(vegetarian == "") {
+        alert(`Du måste fylla i formuläret för att lägga till ett recept`)
+    } 
+    else if(difficulty == "") {
+        alert(`Du måste fylla i formuläret för att lägga till ett recept`)
+    } 
+    else if(time == 0) {
+        alert(`Du måste fylla i formuläret för att lägga till ett recept`);
+    }
+
     let recipe = addNewRecipe(recipename, vegetarian, difficulty, time);
 
     // calculate the newly added recipes ID
@@ -119,7 +132,14 @@ function setAddRecipeHandler() {
 function onRemoveRecipeClick(event) {
     let button = event.target;
     let id = button.parentElement.id;
-    removeRecipeById(database, id);
+
+    if(confirm(`Är du säker på att du vill radera receptet?`) == true) {
+        removeRecipeById(database, id);   
+    }
+    else {
+        return false;
+    }
+
     renderRecipes(database);
 }
 
