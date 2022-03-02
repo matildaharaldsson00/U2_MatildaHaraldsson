@@ -13,7 +13,6 @@ function addNewRecipe(recipename, vegetarian, difficulty, time) {
 
 // adds a new recipe to our database
 function addRecipeToDatabase(database, recipe) {
-    database.push(recipe);
 
     let wantToSaveRecipe = confirm(`Vill du spara ${recipe.recipename} till receptlistan?`);
 
