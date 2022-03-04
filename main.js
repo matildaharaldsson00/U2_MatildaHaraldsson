@@ -14,6 +14,7 @@ function addNewRecipe(recipename, vegetarian, difficulty, time) {
 // adds a new recipe to our database
 function addRecipeToDatabase(database, recipe) {
 
+    // asks if you are sure that you want to add a new racipe to the list
     let wantToSaveRecipe = confirm(`Vill du spara ${recipe.recipename} till receptlistan?`);
 
     if(wantToSaveRecipe) {
@@ -95,6 +96,7 @@ function onAddRecipeSubmit(event) {
     let difficulty = document.getElementById("difficulty").value;
     let time = Number(document.getElementById("time").value);
 
+    // have to fill in alla form boxes to add a new recipe
     if(recipename == "") {
        return alert(`Du måste fylla i formuläret för att lägga till ett recept`);
     } 
@@ -110,8 +112,15 @@ function onAddRecipeSubmit(event) {
 
     let recipe = addNewRecipe(recipename, vegetarian, difficulty, time);
 
-    // calculate the newly added recipes ID
-    recipe.id = database[database.length - 1].id + 1;
+    // calculate the newly added recipes ID and makes it possible to add a new recipe even if the database is empty
+    /* recipe.id = database[database.length - 1].id + 1; */
+    
+    if(database.length = database.length) {
+        recipe.id = database[database.length - 1].id + 1;
+    }
+    else {
+        recipe.id = 1;
+    }
 
     addRecipeToDatabase(database, recipe)
     renderRecipes(database);
@@ -119,6 +128,7 @@ function onAddRecipeSubmit(event) {
     // reset (empty) all form fields
     let form = document.getElementById("add-recipe-form");
     form.reset();
+
 }
 
 // add "click" event handler to <button id="add">
@@ -132,6 +142,7 @@ function onRemoveRecipeClick(event) {
     let button = event.target;
     let id = button.parentElement.id;
 
+    // confirm that you are sure that you want to remove a new recipe
     if(confirm(`Är du säker på att du vill radera receptet?`) == true) {
         removeRecipeById(database, id);   
     }
@@ -167,6 +178,7 @@ function onFilterByVegetarianSubmit(event) {
     renderRecipes(recepies);
 }
 
+// button that resets the fitler search, shows all the recipes
 function onShowAllClick() {
     document.getElementById("filter-difficulty").value = "";
     document.getElementById("filter-vegetarian").value = "";
